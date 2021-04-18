@@ -90,6 +90,18 @@ public class AddressBook {
         contactsList.add(contacts);
         }
 
+    /*Check the no duplicate entry in address book.
+    * Check same name of persons no duplicate entry into address book. */
+    public boolean duplicateEntryCheck(String firstName)
+    {
+        for (Contacts contacts: contactsList) {
+            boolean existAlready=contacts.equals(firstName);
+            if(existAlready==true)
+                return true;
+        }
+        return false;
+    }
+
     /*Edit contact details in a address book.
     * Using person name edit a contact detail.
     * Add one person at time.*/
