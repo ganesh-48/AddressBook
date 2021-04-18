@@ -12,7 +12,11 @@ public class AddressBook {
         System.out.println("Welcome to address book system");
 
         AddressBook addressBook = new AddressBook();
+        Scanner scanner = new Scanner(System.in);
+
         addressBook.addNewContact();
+        System.out.println("Enter the person name who's details want to edit :");
+        addressBook.editContact(scanner.next());
         System.out.println(addressBook.toString());
     }
 
@@ -47,7 +51,40 @@ public class AddressBook {
             System.out.println("contact added");
         }
 
-        //print contact details
+    /*Edit contact details in a address book.
+    * Using person name edit a contact detail. */
+    public void editContact(String firstName) {
+        if(contacts == null) {
+            System.out.println("Address book is empty");
+        } else {
+            if(contacts.getFirstName().equalsIgnoreCase(firstName)) {
+                System.out.println("Edit the Contact details:");
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Enter first name:");
+                contacts.setFirstName(scanner.next());
+                System.out.println("Enter last name:");
+                contacts.setLastName(scanner.next());
+                System.out.println("Enter the address:");
+                contacts.setAddress(scanner.next());
+                System.out.println("Enter city name:");
+                contacts.setCity(scanner.next());
+                System.out.println("Enter the state name:");
+                contacts.setState(scanner.next());
+                System.out.println("Enter the zip code:");
+                contacts.setZip(scanner.nextInt());
+                System.out.println("Enter the mobile number:");
+                contacts.setMobileNumber(scanner.nextLong());
+                System.out.println("Enter the email id:");
+                contacts.setEmail(scanner.next());
+
+                System.out.println("All contact of person name is updated");
+            } else {
+                System.out.println("Entered person name is not found in contacts");
+            }
+        }
+    }
+
+    //print contact details
         public String toString() {
             return contacts.toString();
         }
