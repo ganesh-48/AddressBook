@@ -6,7 +6,8 @@ import java.util.Scanner;
 *Create a contact in address book system.
 *Add contact details FirstName, lastname,address,city,state,zip,phone number and email.
 * Add new contact to address book.
-* Manage a relationship between address book and contact person. */
+* Manage a relationship between address book and contact person.
+* Delete a person details using a person name in address book. */
 public class AddressBook {
     public static void main(String[] args) {
         System.out.println("Welcome to address book system");
@@ -17,6 +18,7 @@ public class AddressBook {
         addressBook.addNewContact();
         System.out.println("Enter the person name who's details want to edit :");
         addressBook.editContact(scanner.next());
+        addressBook.deleteContact(scanner.next());
         System.out.println(addressBook.toString());
     }
 
@@ -80,6 +82,21 @@ public class AddressBook {
                 System.out.println("All contact of person name is updated");
             } else {
                 System.out.println("Entered person name is not found in contacts");
+            }
+        }
+    }
+
+    /*Delete the persons details in address book.
+    *Delete the person details using persons name*/
+    public void deleteContact(String firstName) {
+        if(firstName == null) {
+            System.out.println("Address book is empty");
+        } else {
+            if(contacts.getFirstName().equalsIgnoreCase(firstName)) {
+                contacts = null;
+                System.out.println("Entered person name Contact is deleted from address book");
+            } else {
+                System.out.println("Entered person name contact was not found in address book" );
             }
         }
     }
