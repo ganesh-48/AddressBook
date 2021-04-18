@@ -10,7 +10,8 @@ import java.util.Scanner;
 * Manage a relationship between address book and contact person.
 * Delete a person details using a person name in address book.
 * Add a multiple persons in address book.
-* Add one person at a time in address book. */
+* Add one person at a time in address book.
+* Refactor to add multiple address book to system.*/
 public class AddressBook {
 
     public static void main(String[] args) {
