@@ -23,6 +23,7 @@ public class Contacts {
         this.mobileNumber = mobileNumber;
         this.email = email;
     }
+
     public String getFirstName() {
         return firstName;
     }
@@ -93,5 +94,6 @@ public class Contacts {
         return this.firstName + " " + this.lastName + ":" + this.mobileNumber + "," + this.email + ":"
                 + " address:" + this.address + ", state:" + this.state + ", city:" + this.city + ", zip:"
                 + this.zip;
+
     }
 }
