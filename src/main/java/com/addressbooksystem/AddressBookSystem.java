@@ -138,6 +138,18 @@ public class AddressBookSystem {
                         addressBook.searchPersonByCity(scanner.next());
                         break;
                     case 10:
+                        System.out.println("sort a person City");
+                        addressBook.sortPersonByCity(scanner.next());
+                        break;
+                    case 11:
+                        System.out.println("sort a person state");
+                        addressBook.sortPersonByState(scanner.next());
+                        break;
+                    case 12:
+                        System.out.println("sort a person by zip");
+                        addressBook.sortPersonByZip(scanner.next());
+                        break;
+                    case 13:
                         break;
                     default:
                         System.out.println("press correct choice number");

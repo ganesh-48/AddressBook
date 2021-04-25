@@ -17,7 +17,10 @@ import java.util.stream.Collectors;
 * Search person by state .
 * used dictionary of city and person.
 * count  number of person by city or state name
-* sort the entries in address book  alphabetically by Person’s name.*/
+* sort the entries in address book  alphabetically by Person’s name.
+* sort the entries in the address book by Person’s city.
+* sort the entries in the address book by Person’s state.
+* sort the entries in the address book by Person’s zip.*/
 public class AddressBook {
 
     //instance variable creating multiple contacts
@@ -27,7 +30,7 @@ public class AddressBook {
     public static Scanner scanner = new Scanner(System.in);
 
     /*Add a new contact in a address book.
-    * Add person details in this address book.*/
+     * Add person details in this address book.*/
     public void addNewContact() {
         String firstName, lastName, address, city, state, email;
         int zip;
@@ -55,10 +58,10 @@ public class AddressBook {
         System.out.println("contact added");
         contactsList.add(contacts);
 
-        }
+    }
 
     /*Check the no duplicate entry in address book.
-    * Check same name of persons no duplicate entry into address book. */
+     * Check same name of persons no duplicate entry into address book. */
     public boolean duplicateEntryCheck(String firstName) {
         for (Contacts contacts : contactsList) {
             boolean existAlready = contacts.equals(firstName);
@@ -69,8 +72,8 @@ public class AddressBook {
     }
 
     /*Edit contact details in a address book.
-    * Using person name edit a contact detail.
-    * Add one person at time.*/
+     * Using person name edit a contact detail.
+     * Add one person at time.*/
     public void editContact(String firstName) {
         if (contactsList.isEmpty()) {
             System.out.println("Address book is empty");
@@ -154,7 +157,7 @@ public class AddressBook {
     }
 
     /*Delete the persons details in address book.
-    *Delete the person details using persons name*/
+     *Delete the person details using persons name*/
     public void deleteContact(String firstName) {
         if (contactsList.isEmpty()) {
             System.out.println("Address book is empty");
@@ -197,6 +200,7 @@ public class AddressBook {
             }
         }
     }
+
     /*Search person by city.
      * used dictionary of city and person.*/
     public void searchPersonByCity(String city) {
@@ -212,7 +216,7 @@ public class AddressBook {
     }
 
     /*Search person by state .
-    * used dictionary of state and person.*/
+     * used dictionary of state and person.*/
     public void searchPersonByState(String state) {
         String stateName = scanner.next();
         System.out.println("Person Search by " + stateName);
@@ -231,7 +235,7 @@ public class AddressBook {
         Collection<Contacts> values = contacts.values();
         ArrayList<Contacts> conatactlist
                 = new ArrayList<>(values);
-        System.out.println(conatactlist.stream().collect(Collectors.groupingBy((Contacts C) -> C.getCity(),Collectors.counting())));
+        System.out.println(conatactlist.stream().collect(Collectors.groupingBy((Contacts C) -> C.getCity(), Collectors.counting())));
     }
 
     /* count  person by state name */
@@ -239,21 +243,59 @@ public class AddressBook {
         Collection<Contacts> values = contacts.values();
         ArrayList<Contacts> conatactlist
                 = new ArrayList<>(values);
-        System.out.println(conatactlist.stream().collect(Collectors.groupingBy((Contacts C) -> C.getState(),Collectors.counting())));
+        System.out.println(conatactlist.stream().collect(Collectors.groupingBy((Contacts C) -> C.getState(), Collectors.counting())));
     }
 
     /*sort the entries in address book  alphabetically by Person’s name*/
-    public void sortPersonByFirstname(){
+    public void sortPersonByFirstname() {
         Collection<Contacts> values = contacts.values();
         ArrayList<Contacts> conatactlist
                 = new ArrayList<>(values);
-        System.out.println("Contact list before sorting the list");
-        for (Contacts cont : conatactlist){
+        for (Contacts cont : conatactlist) {
             System.out.println(cont.getFirstName() + cont.getLastName());
         }
-        System.out.println("Contact list after sorting the list");
         conatactlist.stream();
         conatactlist.sort(Comparator.comparing(Contacts::getFirstName));
         conatactlist.forEach((Contacts cont) -> System.out.println(cont.getFirstName() + " " + cont.getLastName()));
+    }
+
+    /* sort the entries in the address book by Person’s city */
+    public void sortPersonByCity(String next) {
+        Collection<Contacts> values = contacts.values();
+        ArrayList<Contacts> conatactlist
+                = new ArrayList<>(values);
+        for (Contacts cont : conatactlist){
+            System.out.println(cont.getCity() + " : " + cont.getFirstName() + " " + cont.getLastName());
+        }
+        conatactlist.stream();
+        conatactlist.sort(Comparator.comparing(Contacts::getCity));
+        conatactlist.forEach((Contacts cont) -> System.out.println(cont.getCity() + " : " +cont.getFirstName() + " " + cont.getLastName()));
+    }
+
+    /* sort the entries in the address book  by Person’s state */
+    public void sortPersonByState(String next) {
+        Collection<Contacts> values = contacts.values();
+        ArrayList<Contacts> conatactlist
+                = new ArrayList<>(values);
+        for (Contacts cont : conatactlist) {
+            System.out.println(cont.getState() + " : " + cont.getFirstName() + " " + cont.getLastName());
+        }
+        conatactlist.stream();
+        conatactlist.sort(Comparator.comparing(Contacts::getState));
+        conatactlist.forEach((Contacts cont) -> System.out.println(cont.getState() + " : " + cont.getFirstName() + " " + cont.getLastName()));
+    }
+
+    /* sort the entries in the address book  by Person’s zip code */
+    public void sortPersonByZip(String next) {
+        Collection<Contacts> values = contacts.values();
+        ArrayList<Contacts> conatactlist
+                = new ArrayList<>(values);
+        for (Contacts cont : conatactlist) {
+            System.out.println(cont.getZip() + " : " + cont.getFirstName() + " " + cont.getLastName());
+        }
+        conatactlist.stream();
+        conatactlist.sort(Comparator.comparing(Contacts::getZip));
+        conatactlist.forEach((Contacts cont) -> System.out.println(cont.getZip() + " : " + cont.getFirstName() + " " + cont.getLastName()));
+
     }
 }
