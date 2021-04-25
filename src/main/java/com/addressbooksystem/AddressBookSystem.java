@@ -91,7 +91,12 @@ public class AddressBookSystem {
                 System.out.println("press 2 -> To edit the existing contact");
                 System.out.println("press 3 -> To delete the existing contact");
                 System.out.println("press 4 -> To print the Address Book");
-                System.out.println("press 5 -> To exit");
+                System.out.println("press 5 -> To search person by city");
+                System.out.println("press 6 -> To search person by state");
+                System.out.println("press 7 -> To count person by city");
+                System.out.println("press 8 -> To count person by state");
+                System.out.println("press 9 -> sort");
+                System.out.println("press 10 -> To exit");
 
                 choice = scanner.nextInt();
                 switch (choice) {
@@ -109,11 +114,30 @@ public class AddressBookSystem {
                         addressBook.deleteContact(scanner.next());
                         break;
                     case 4:
+                        System.out.println("Search a Address book");
+                        addressBook.searchPersonByCity(scanner.next());
+                        break;
+                    case 5:
                         System.out.println("Search a person by city");
                         addressBook.searchPersonByCity(scanner.next());
                         break;
-
-                    case 5:
+                    case 6:
+                        System.out.println("Search a person by state");
+                        addressBook.searchPersonByCity(scanner.next());
+                        break;
+                    case 7:
+                        System.out.println("count person by city");
+                        addressBook.searchPersonByCity(scanner.next());
+                        break;
+                    case 8:
+                        System.out.println("count person by state");
+                        addressBook.searchPersonByCity(scanner.next());
+                        break;
+                    case 9:
+                        System.out.println("sort a person");
+                        addressBook.searchPersonByCity(scanner.next());
+                        break;
+                    case 10:
                         break;
                     default:
                         System.out.println("press correct choice number");
