@@ -1,19 +1,16 @@
 package com.addressbooksystem;
 
 public class Contacts {
-
-    private String firstName;
+    public String firstName;
     private String lastName;
     private String address;
-    private String city;
-    private String state;
+    public String city;
+    public String state;
     private int zip;
     private long mobileNumber;
     private String email;
 
-    public Contacts(String firstName, String lastName, String address, String city, String state, int zip, long mobileNumber,
-                    String email) {
-        super();
+    public Contacts(String firstName, String lastName, String address, String city, String state, int zip, long mobileNumber, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.address = address;
@@ -75,7 +72,6 @@ public class Contacts {
     public long getMobileNumber() {
         return mobileNumber;
     }
-
     public void setMobileNumber(long mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
@@ -87,13 +83,14 @@ public class Contacts {
     public void setEmail(String email) {
         this.email = email;
     }
-
     @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return this.firstName + " " + this.lastName + ":" + this.mobileNumber + "," + this.email + ":"
-                + " address:" + this.address + ", state:" + this.state + ", city:" + this.city + ", zip:"
+    public String toString(){
+        return this.firstName + " " + this.lastName + ":" + this.mobileNumber + ", " + this.email +  " "
+                + " address:" + this.address + ", state:" + this.state + ", city:" + this.city + ", zipCode:"
                 + this.zip;
+    }
 
+
+    public void put(int indexValue, Contacts contacts) {
     }
 }

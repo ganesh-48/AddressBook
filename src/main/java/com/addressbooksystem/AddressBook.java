@@ -1,7 +1,6 @@
 package com.addressbooksystem;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 /*@Description-Welcome to address book system.
 *Create a contact in address book system.
@@ -11,59 +10,23 @@ import java.util.Scanner;
 * Delete a person details using a person name in address book.
 * Add a multiple persons in address book.
 * Add one person at a time in address book.
-* Refactor to add multiple address book to system.*/
+* Refactor to add multiple address book to system.
+* Check the no duplicate entry in address book.
+* Check same name of persons no duplicate entry into address book.
+* Search person by state .
+* used dictionary of city and person.*/
 public class AddressBook {
 
-    public static void main(String[] args) {
-        System.out.println("Welcome to address book system");
-
-        AddressBook addressBook = new AddressBook();
-        int choice = 0;
-        while (choice != 5){
-            Scanner scanner = new Scanner(System.in);
-            System.out.println("Enter your choice");
-            System.out.println("Enter 1 : Add  new contact");
-            System.out.println("Enter 2 : Edit contact");
-            System.out.println("Enter 3 : Delete contact");
-            System.out.println("Enter 4 : Print the Address Book");
-            System.out.println("Enter 5 : Exit");
-            choice = scanner.nextInt();
-            switch (choice) {
-
-                case 1:
-                    addressBook.addNewContact();
-                    break;
-
-                case 2:
-                    System.out.println("Enter the first name of contact you want to edit :");
-                    addressBook.editContact(scanner.next());
-                    break;
-
-                case 3:
-                    System.out.println("Enter the first name of contact you want to delete :");
-                    addressBook.deleteContact(scanner.next());
-
-                case 4:
-                    System.out.println(addressBook.toString());
-                    break;
-
-                case 5:
-                    System.exit(choice);
-                    break;
-
-                default:
-                    System.out.println("Enter a correct choice");
-            }
-        }
-    }
-
     //instance variable creating multiple contacts
+    String addressBookName;
     ArrayList<Contacts> contactsList = new ArrayList<Contacts>();
+    public HashMap<Integer, Contacts> contacts = new HashMap<>();
+    public static Scanner scanner = new Scanner(System.in);
 
     /*Add a new contact in a address book.
     * Add person details in this address book.*/
     public void addNewContact() {
-        String firstName,lastName,address,city,state,email;
+        String firstName, lastName, address, city, state, email;
         int zip;
         long mobileNumber;
 
@@ -85,18 +48,17 @@ public class AddressBook {
         System.out.println("Enter the mobile number :");
         mobileNumber = scanner.nextLong();
 
-        Contacts contacts  = new Contacts(firstName, lastName, address, city, state, zip, mobileNumber, email);
+        Contacts contacts = new Contacts(firstName, lastName, address, city, state, zip, mobileNumber, email);
         System.out.println("contact added");
         contactsList.add(contacts);
         }
 
     /*Check the no duplicate entry in address book.
     * Check same name of persons no duplicate entry into address book. */
-    public boolean duplicateEntryCheck(String firstName)
-    {
-        for (Contacts contacts: contactsList) {
-            boolean existAlready=contacts.equals(firstName);
-            if(existAlready==true)
+    public boolean duplicateEntryCheck(String firstName) {
+        for (Contacts contacts : contactsList) {
+            boolean existAlready = contacts.equals(firstName);
+            if (existAlready == true)
                 return true;
         }
         return false;
@@ -106,13 +68,13 @@ public class AddressBook {
     * Using person name edit a contact detail.
     * Add one person at time.*/
     public void editContact(String firstName) {
-        if(contactsList.isEmpty()) {
+        if (contactsList.isEmpty()) {
             System.out.println("Address book is empty");
         } else {
             int p = contactsList.size();
             int i;
-            for( i = 0; i < contactsList.size(); i++) {
-                if(contactsList.get(i).getFirstName().equalsIgnoreCase(firstName)) {
+            for (i = 0; i < contactsList.size(); i++) {
+                if (contactsList.get(i).getFirstName().equalsIgnoreCase(firstName)) {
                     System.out.println("you want edit details");
                     System.out.println("Enter 1 : Edit first name");
                     System.out.println("Enter 2 : Edit last name ");
@@ -181,7 +143,7 @@ public class AddressBook {
                     break;
                 }
             }
-            if(p == i) {
+            if (p == i) {
                 System.out.println("Contact not found");
             }
         }
@@ -190,20 +152,20 @@ public class AddressBook {
     /*Delete the persons details in address book.
     *Delete the person details using persons name*/
     public void deleteContact(String firstName) {
-        if(contactsList.isEmpty()) {
+        if (contactsList.isEmpty()) {
             System.out.println("Address book is empty");
         } else {
             int p = contactsList.size();
             int i;
-            for( i = 0; i < contactsList.size(); i++) {
-                if(contactsList.get(i).getFirstName().equalsIgnoreCase(firstName)) {
+            for (i = 0; i < contactsList.size(); i++) {
+                if (contactsList.get(i).getFirstName().equalsIgnoreCase(firstName)) {
                     Contacts contact = contactsList.get(i);
                     contact = null;
                     System.out.println("Entered person name Contact is deleted from address book");
                     break;
                 }
             }
-            if(p == i) {
+            if (p == i) {
                 System.out.println("Entered contact is not fount address book");
             }
         }
@@ -219,5 +181,44 @@ public class AddressBook {
             }
         }
         return "";
+    }
+
+    //Delete all the contact from AddressBook
+    public void deleteAddressBook() {
+        if (!contactsList.isEmpty()) {
+            for (int i = 0; i < contactsList.size(); i++) {
+                Contacts contact = contactsList.get(i);
+                contact = null;
+                contactsList.remove(i);
+            }
+        }
+    }
+    /*Search person by city.
+     * used dictionary of city and person.*/
+    public void searchPersonByCity(String city) {
+        System.out.println("show person by city in " + addressBookName);
+        if (!contactsList.isEmpty()) {
+            for (int i = 0; i < contactsList.size(); i++) {
+                Contacts contact = contactsList.get(i);
+                if (contact.getCity() == city) {
+                    System.out.println(i + 1 + "." + contact.getFirstName().toString());
+                }
+            }
+        }
+    }
+
+    /*Search person by state .
+    * used dictionary of state and person.*/
+    public void searchPersonByState(String state) {
+        String stateName = scanner.next();
+        System.out.println("Person Search by " + stateName);
+        Collection<Contacts> values = contacts.values();
+        ArrayList<Contacts> conatactlist
+                = new ArrayList<>(values);
+        Dictionary dictWithState = new Hashtable();
+        conatactlist.stream().filter(n -> n.state.contains(stateName)).forEach(contactlist -> dictWithState.put(contactlist.firstName, stateName));
+        for (Enumeration i = dictWithState.keys(); i.hasMoreElements(); ) {
+            System.out.println(i.nextElement());
+        }
     }
 }
