@@ -1,6 +1,7 @@
 package com.addressbooksystem;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /*@Description-Welcome to address book system.
 *Create a contact in address book system.
@@ -14,7 +15,8 @@ import java.util.*;
 * Check the no duplicate entry in address book.
 * Check same name of persons no duplicate entry into address book.
 * Search person by state .
-* used dictionary of city and person.*/
+* used dictionary of city and person.
+* count  number of person by city or state name*/
 public class AddressBook {
 
     //instance variable creating multiple contacts
@@ -51,6 +53,7 @@ public class AddressBook {
         Contacts contacts = new Contacts(firstName, lastName, address, city, state, zip, mobileNumber, email);
         System.out.println("contact added");
         contactsList.add(contacts);
+
         }
 
     /*Check the no duplicate entry in address book.
@@ -220,5 +223,21 @@ public class AddressBook {
         for (Enumeration i = dictWithState.keys(); i.hasMoreElements(); ) {
             System.out.println(i.nextElement());
         }
+    }
+
+    /*  count  person by city name */
+    public void countPersonByCity() {
+        Collection<Contacts> values = contacts.values();
+        ArrayList<Contacts> conatactlist
+                = new ArrayList<>(values);
+        System.out.println(conatactlist.stream().collect(Collectors.groupingBy((Contacts C) -> C.getCity(),Collectors.counting())));
+    }
+
+    /* count  person by state name */
+    public void countPersonByState() {
+        Collection<Contacts> values = contacts.values();
+        ArrayList<Contacts> conatactlist
+                = new ArrayList<>(values);
+        System.out.println(conatactlist.stream().collect(Collectors.groupingBy((Contacts C) -> C.getState(),Collectors.counting())));
     }
 }
